@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+	body{
+		font-family: Microsoft YaHei
+	}
+	div{
+	  	text-align:center
+	  }
+	a{
+		text-decoration: none
+	}
+	h3{
+		color: blue;
+	}
