@@ -1,0 +1,482 @@
+var domutils = jsloader.resolve("freequery.lang.domutils");
+
+/**
+ * modalWindow.js modalWindow对象${Comma}用showServerError显示服务器错误,<br>
+ * 它支持的参数可以是字符串和 util.remoteInvoke返回的对象；<br>
+ * 用open显示模态提示对话框功能
+ */
+var counter = 0;
+var modalWindow = {
+	generateId : function() {
+		return 'dialog' + (++counter);
+	},
+	showServerError : function(result) {
+		var caption = this.getCaption();
+		if (window.bof_offline_xhr) {
+			if (window.bof_offline_xhr.debug) {
+				alert(result.detail);
+			}
+			return;
+		}
+		if (typeof result == 'undefined') {
+			this.open('${Undefinederror}', caption, this.MB_OK | this.MB_ICONERROR);
+			return;
+		}
+		
+		if(result.retCode == "Insight_Interrupted") {
+			return;
+		}
+		
+		var obj = result;
+		if (typeof obj == 'string') {
+			this.open(obj, caption, this.MB_OK | this.MB_ICONEXCLAMATION);
+			return;
+		}
+		if (obj && domutils.isMobile()) {
+			if (obj.detail) {
+				var text = '' + obj.detail;
+				if (text.indexOf('WinInet error occurred') != -1) {
+					return;
+				}
+			}
+		}
+		if (obj) {
+			var text = obj.result ? obj.result : '${Unknownerror}';
+			if (obj.detail) {
+				text += ': ' + obj.detail;
+			}
+			switch (obj.retCode) {
+				case 'CONNECT_TO_REPOSITORY_FAIL': {
+					try {
+						if (window.opener && !window.opener.isDpWindow) {
+							alert(text);
+							return;
+						}
+					} catch (e) {
+					}
+					if (!window.__reLogining) {
+						alert(text);
+					}
+					window.__reLogining = true;
+					try {
+						var a = window.location.href;
+						window.location.href = a.substring(0, a.lastIndexOf('/') + 1)
+								+ 'connectfial.jsp';
+					} catch (e) {
+					}
+					break;
+				}
+				case 'CLIENT_USER_NOT_LOGIN':
+				case 'SESSION_INVALID': {
+					try {
+						if (window.opener && !window.opener.isDpWindow) {
+							alert(text);
+							return;
+						}
+					} catch (e) {
+					}
+					if (!window.__reLogining) {
+						alert(text + '\n' + '${SystemWillReLogin}${Exclamation}');
+					}
+					window.__reLogining = true;
+					try {
+						debugger;
+						if(domutils.isMobile()){
+							//移动端超时跳转页面
+							window.location.href = "http://www.baidu.com";
+						}else{
+							//电脑端超时跳转页面
+							window.location.href = "http://www.qq.com";
+						}
+					} catch (e) {
+					}
+					break;
+				}
+				case 'ERROR_INTERNET_ERROR_CODE':
+					this.open(text, caption, this.MB_OK | this.MB_ICONERROR, obj.stackTrace);
+					break;
+				case 'USER_CANNOT_DELETE_BUILTIN_USER':
+				case 'USER_CANNOT_CHANGED_BUILTIN_USER':
+				case 'USER_CANNOT_DELETE_BUILTIN_ROLE':
+				case 'USER_CANNOT_DELETE_BUILTIN_GROUP':
+				case 'USER_CANNOT_DELETE_BUILTIN_ROLE':
+				case 'USER_CANNOT_DELETE_SELF':
+					this.open(text, caption, this.MB_OK | this.MB_ICONEXCLAMATION, obj.stackTrace);
+					break;
+				default:
+					if (typeof obj.retCode != 'undefined') {
+						text = this.deleteHTMLElement(text);
+						try {
+							obj.stackTrace = this.deleteHTMLElement(obj.stackTrace);
+						} catch(e) {
+							
+						}
+						this.open(text, caption, this.MB_OK | this.MB_ICONEXCLAMATION,
+								obj.stackTrace);
+					} else {
+						if (!window.__reLogining && alert) {
+							alert('${Unknownexception}${Comma}${Possibleserverhasbeenstopped}');
+							window.__reLogining = true;
+						}
+					}
+			}
+		} else {
+			this.open('${Unknownerror}', caption, this.MB_OK | this.MB_ICONERROR);
+		}
+	},
+	
+	deleteHTMLElement : function(htmlText) {
+		var htmlStartIndex = htmlText.indexOf("<html>");
+		var htmlEndIndex = htmlText.indexOf("</html>") + "</html>".length;
+		if(htmlStartIndex != - 1 && htmlEndIndex != -1) {
+			htmlText = htmlText.substring(0, htmlStartIndex) + htmlText.substring(htmlEndIndex + "</html>".length);
+			return this.deleteHTMLElement(htmlText);
+		}
+		return htmlText;
+	},
+
+	getCaption : function() {
+		var caption = registry.get("defaultDialogTitle");
+		if (!caption) {
+			caption = "${Promptinformation}";
+			registry.put("defaultDialogTitle", caption);
+		}
+		return caption;
+	},
+
+	/**
+	 * @param text
+	 *            显示文本或options对象
+	 * @param caption
+	 *            标题
+	 * @param flags
+	 *            标记 是 按钮类型|图标类型|缺省选中按钮 三者的或值
+	 * @param extraInfo
+	 *            更多信息
+	 * @param fn
+	 *            回调函数
+	 * @param obj
+	 *            回调函数内部的this对象
+	 */
+	open : function(text, caption, flags, extraInfo, fn, obj) {
+		caption = caption || this.getCaption();
+		if (typeof text == 'object' && text) {
+			return modalWindow.callLayer('open', text);
+		}
+		var options, reg_newline = /(\n\r|\r\n|\n|\r)/gi, newline = '<br>';
+		var callback = function(result) {
+			if (options) {
+				if (options.__closing) {
+					return;
+				}
+				options.__closing = true;
+				modalWindow.callLayer('close', options.__layerIndex);
+			}
+			if (typeof fn == 'function') {
+				var ret = result || modalWindow.ID_UNKNOWN;
+				fn.call(obj, ret);
+			}
+		}, getContentHtml = function(text, needSelectAll) {
+			var buf = [];
+			if (needSelectAll) {
+				buf.push('<textarea style="position:relative;top:10px;left:10px;width:95%;height:259px;');
+				buf.push('	border:1px solid #DCD9D5;" readonly="readonly">');
+				buf.push(text.replace(/<br\s*[\/]?>/g, '\n'));
+				buf.push('</textarea>');
+			} else {
+				buf.push('<div style="padding:10px;">');
+				buf.push(text);
+				buf.push('</div>');
+			}
+			return buf.join('');
+		};
+		if (window.openIntegratePage && window.openIntegratePage == 'y'
+				&& (text + '').indexOf('WinInet error occurred') != -1) {
+			callback();
+			return;
+		}
+		if (domutils.isFirefox() && (text + '').indexOf('WinInet error occurred') != -1) {
+			callback();
+			return;
+		}
+		text = (text + '').replace(reg_newline, newline);
+		if (extraInfo) {
+			extraInfo = (extraInfo + '').replace(reg_newline, newline);
+			options = {
+				id : modalWindow.generateId(),
+				type : 1,
+				area : '420px,250px'.split(','),
+				title : caption,
+				content : getContentHtml(text),
+				zIndex : modalWindow.get_zIndex(),
+				btn : '${DisplayStackInformation}(S)<button accesskey="S" style="display:none;"></button>,${OK}(O)<button accesskey="O" style="display:none;"></button>,${Exportsystemlog}(D)<button accesskey="D" style="display:none;"></button>'
+						.split(','),
+				yes : function(index, layero) { // 第1个按钮的回调
+					modalWindow.callLayer('open', {
+						type : 1,
+						area : '500px,380px'.split(','),
+						title : '${DisplayStackInformation}',
+						content : getContentHtml(extraInfo, true),
+						zIndex : modalWindow.get_zIndex(),
+						btn : '${OK}(O)<button accesskey="O" style="display:none;"></button>'
+								.split(','),
+						moveOut : true, // 是否允许拖拽到窗口外
+						yes : function(index, layero) {
+							modalWindow.callLayer('close', index);
+						}
+					});
+				},
+				cancel : function(index) { // 第2个按钮的回调
+					modalWindow.callLayer('close', index);
+				},
+				btn3 : function(index, layero) { // 第3个按钮的回调
+					var f = document.getElementById('exportTraceForm');
+					if (!f) {
+						var span = document.createElement('SPAN');
+						span.style.display = 'none';
+						document.body.appendChild(span);
+						f = document.createElement('FORM');
+						f.id = 'exportTraceForm';
+						span.appendChild(f);
+						f.method = 'POST';
+						f.action = 'MigrateServlet';
+						var input = document.createElement('INPUT');
+						input.type = 'hidden';
+						input.name = 'type';
+						input.value = 'exportSmartbiLog';
+						f.appendChild(input);
+					}
+					f.submit();
+					return false;
+				}
+			};
+		} else {
+			options = {
+				id : modalWindow.generateId(),
+				title : caption,
+				content : getContentHtml(text),
+				zIndex : modalWindow.get_zIndex()
+			};
+			flags = flags || modalWindow.MB_OK; // 设置默认值是为了在下面添加快捷键
+			var btns = [];
+			if (flags & modalWindow.MB_YES) {
+				btns.push('${Yes}(Y)<button accesskey="Y" style="display:none;"></button>');
+				options['btn' + btns.length] = function() {
+					callback(modalWindow.ID_YES);
+				};
+			}
+			if (flags & modalWindow.MB_NO) {
+				btns.push('${No}(N)<button accesskey="N" style="display:none;"></button>');
+				options['btn' + btns.length] = function() {
+					callback(modalWindow.ID_NO);
+				};
+			}
+			if (flags & modalWindow.MB_OK) {
+				btns.push('${OK}(O)<button accesskey="O" style="display:none;"></button>');
+				options['btn' + btns.length] = function() {
+					callback(modalWindow.ID_OK);
+				};
+			}
+			if (flags & modalWindow.MB_CANCEL) {
+				btns.push('${Cancel}(C)<button accesskey="C" style="display:none;"></button>');
+				options['btn' + btns.length] = function() {
+					callback(modalWindow.ID_CANCEL);
+				};
+			}
+			if (flags & modalWindow.MB_ABORT) {
+				btns.push('${Abandon}(A)<button accesskey="A" style="display:none;"></button>');
+				options['btn' + btns.length] = function() {
+					callback(modalWindow.ID_ABORT);
+				};
+			}
+			if (flags & modalWindow.MB_RETRY) {
+				btns.push('${Retry}(R)<button accesskey="R" style="display:none;"></button>');
+				options['btn' + btns.length] = function() {
+					callback(modalWindow.ID_RETRY);
+				};
+			}
+			if (flags & modalWindow.MB_IGNORE) {
+				btns.push('${Ignore}(I)<button accesskey="I" style="display:none;"></button>');
+				options['btn' + btns.length] = function() {
+					callback(modalWindow.ID_IGNORE);
+				};
+			}
+			if (btns.length > 0) {
+				options.btn = btns;
+			}
+		}
+		options.success = function(layero, index) {
+			try {
+				if(document.activeElement) {
+					document.activeElement.blur();
+				}
+			} catch(e) {
+				
+			}
+			options.__layerIndex = index;
+		};
+		options.end = function() {
+			callback();
+		};
+		if (domutils.isMobile()) {
+			if (options.btn && options.btn.length > 2) {
+				options.btn.splice(2, 1);
+			}
+			if (document.body.clientWidth < 420 && options.area) {
+				var dialogWidth = document.body.clientWidth - 10;
+				options.area[0] = dialogWidth + "px";
+				
+				options.yes = function(index, layero) { // 第1个按钮的回调
+					modalWindow.callLayer('open', {
+						type : 1,
+						area : (dialogWidth + 'px,380px').split(','),
+						title : '${DisplayStackInformation}',
+						content : getContentHtml(extraInfo),
+						zIndex : modalWindow.get_zIndex(),
+						btn : '${OK}(O)<button accesskey="O" style="display:none;"></button>'
+								.split(','),
+						moveOut : true, // 是否允许拖拽到窗口外
+						yes : function(index, layero) {
+							modalWindow.callLayer('close', index);
+						}
+					});
+				};
+			}
+		}
+		modalWindow.callLayer('open', options);
+	},
+
+	showLoading : function(type, options) {
+		return modalWindow.callLayer('load', type, options);
+	},
+
+	hideLoading : function(layerIndex) {
+		modalWindow.callLayer('close', layerIndex);
+	},
+
+	/**
+	 * layer方法的代理，统一layer各方法的调用入口
+	 */
+	callLayer : function(methodName, arg1, arg2, arg3, arg4, arg5) {
+		var args = [].slice.call(arguments, 1);
+		var fn = layer[methodName];
+		var result = fn.apply(layer, args);
+		if (methodName == 'open') {
+			modalWindow._pushLayer(result);
+			if (domutils.isEdge()) {
+				$("#layui-layer" + result).css("visibility", "hidden");
+				setTimeout(function() {
+					$("#layui-layer" + result).css("visibility", "visible");
+				}, 10);
+			}
+		}
+		return result;
+	},
+
+	/**
+	 * 
+	 */
+	getLastestLayer : function() {
+		var result = null;
+		if (modalWindow._layerIndexs) {
+			for ( var len = modalWindow._layerIndexs.length, i = len - 1; i >= 0; i--) {
+				var index = modalWindow._layerIndexs[i];
+				var layero = jQuery('#layui-layer' + index);
+				if (layero[0]) { // DOM对象还存在
+					result = {
+						'index' : index,
+						'layero' : layero
+					};
+					break;
+				} else {
+					modalWindow._layerIndexs.pop();
+				}
+			}
+		}
+		return result;
+	},
+	
+	_pushLayer : function(index) {
+		if (!modalWindow._layerIndexs) {
+			modalWindow._layerIndexs = [];
+			jQuery(document).bind('keydown', function(evt) {
+				var keyCodeEsc = 27, keyCodeEnter = 13, keyCodeF4 = 115;
+				if (evt.which == keyCodeEsc) { // ESC
+					modalWindow._popLayer();
+				} else if (evt.which == keyCodeEnter) { // Enter
+					modalWindow._popLayer(true);
+				} else if (evt.which == keyCodeF4 && evt.ctrlKey && evt.shiftKey) { // Ctrl + Shift + F4
+					var ret = modalWindow.getLastestLayer();
+					if (ret && ret.layero) {
+						var bofClassName = ret.layero.attr('bofClassName');
+						if (bofClassName) {
+							alert(bofClassName);
+						}
+					}
+				}
+			});
+		}
+		modalWindow._layerIndexs.push(index);
+	},
+
+	_popLayer : function(isEnter) {
+		var ret = modalWindow.getLastestLayer();
+		if (!ret) {
+			return;
+		}
+		var index = ret.index;
+		var layero = ret.layero;
+		if (isEnter) { // Enter
+			layero.find('.layui-layer-btn .layui-layer-btn0').click(); // 触发默认按钮的点击事件
+		} else { // Esc
+			modalWindow._layerIndexs.pop();
+			layer.close(index); // 关闭对话框
+		}
+	},
+	
+	get_zIndex : function() {
+		if ('undefined' == typeof layer.zIndex) {
+			return 999;
+		} else {
+			return layer.zIndex + 1;
+		}
+	},
+
+	/* MessageBox的flags参数对应的常量定义${Comma}包括: 图标类型${Comma}按钮类型以及返回值类型 */
+
+	/* 图标的类型(1-2位) */
+	MB_ICONEXCLAMATION:  0x00000001,
+	MB_ICONQUESTION:     0x00000002,
+	MB_ICONERROR:        0x00000004,
+	MB_ICONINFORMATION:  0x00000010,
+	
+	/* 设置默认选中的按钮(3-4位) */
+	MB_DEFBUTTON1:       0x00000100,
+	MB_DEFBUTTON2:       0x00000200,
+	MB_DEFBUTTON3:       0x00000400,
+	MB_DEFBUTTON4:       0x00000800,
+	
+	/* 按钮的类型(5-6位) */
+	MB_OK:               0x00010000,
+	MB_CANCEL:           0x00020000,
+	MB_ABORT:            0x00040000,
+	MB_RETRY:            0x00080000,
+	MB_IGNORE:	         0x00100000,
+	MB_YES:              0x00200000,
+	MB_NO:               0x00400000,
+	MB_OKCANCEL:         0x00030000,
+	MB_ABORTRETRYIGNORE: 0x001C0000,
+	MB_YESNOCANCEL:      0x00620000,
+	MB_YESNO:            0x00600000,
+	MB_RETRYCANCEL:      0x000A0000,
+	
+	/* 函数的返回值 */
+	ID_UNKNOWN:          0x0000A000,
+	ID_OK:               0x0000A001,
+	ID_CANCEL:           0x0000A002,
+	ID_ABORT:            0x0000A003,
+	ID_RETRY:            0x0000A004,
+	ID_IGNORE:           0x0000A005,
+	ID_YES:              0x0000A006,
+	ID_NO:               0x0000A007
+};

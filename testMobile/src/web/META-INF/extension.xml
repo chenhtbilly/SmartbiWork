@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <!DOCTYPE extension SYSTEM "extension.dtd"> 
-<extension name="testMobile" alias="" desc="" priority="100" version="1.0"> 
+<extension name="testMobile" alias="" desc="" priority="30" version="1.0"> 
 	<enable-jsp-processor>1</enable-jsp-processor> 
 	<!--    
 	<servlet>  
