@@ -82,11 +82,12 @@ var modalWindow = {
 					try {
 						debugger;
 						if(domutils.isMobile()){
-							//移动端超时跳转页面
-							window.location.href = "http://www.baidu.com";
+							//移动端超时跳转页面 无用
+							debugger;
+							window.location.href = "clientSDKDemo.jsp";
 						}else{
 							//电脑端超时跳转页面
-							window.location.href = "http://www.qq.com";
+							window.location.href = "clientSDKDemo.jsp";
 						}
 					} catch (e) {
 					}
