@@ -1,6 +1,7 @@
 package com.proj;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -120,19 +121,33 @@ public class MyJavaQuery implements IJavaQueryData.ISimpleData {
 	 */
 	public void init() {
 		try {
-			reader = new BufferedReader(new InputStreamReader(
-					new FileInputStream(configs.get("FileName").getValue()),
-					configs.get("Encoding").getValue()));
-			String titleLine = reader.readLine();
-			String[] fields = titleLine.split(",");
 			outputFields = new ArrayList<JavaQueryOutputField>();
-			for (String str : fields) {
-				JavaQueryOutputField f = new JavaQueryOutputField();
-				f.setId(str);
-				f.setName(str);
-				f.setAlias(str);
-				f.setDataType(ValueType.STRING);
-				outputFields.add(f);
+			File file = new File(configs.get("FileName").getValue());
+			if (file.exists()) {
+				FileInputStream fis = new FileInputStream(file);
+				if (configs.get("Encoding").getValue().toLowerCase().equals("utf-8")) {
+					byte[] headData = new byte[3];
+					fis.read(headData, 0, 3);
+					if (headData[0] != (byte) 0xef || headData[1] != (byte) 0xbb || headData[2] != (byte) 0xbf) {
+						fis.close();
+						fis = new FileInputStream(file);
+					}
+				}
+				reader = new BufferedReader(new InputStreamReader(fis, configs.get("Encoding").getValue()));
+				String titleLine = reader.readLine();
+				String[] fields = titleLine == null ? "".split(",") : titleLine.split(",");
+				for (String str : fields) {
+					JavaQueryOutputField f = new JavaQueryOutputField();
+					f.setId(str);
+					f.setName(str);
+					f.setAlias(str);
+					if (str.equals(StringUtil.getLanguageValue("Value1"))) {
+						f.setDataType(ValueType.DOUBLE);
+					} else {
+						f.setDataType(ValueType.STRING);
+					}
+					outputFields.add(f);
+				}
 			}
 			currentLine = 0;
 		} catch (UnsupportedEncodingException e) {
@@ -184,21 +199,31 @@ public class MyJavaQuery implements IJavaQueryData.ISimpleData {
 	public GridData getGridData(int from, int count) {
 		try {
 			if (currentLine > from) {
-				reader.close();
-				reader = new BufferedReader(
-						new InputStreamReader(new FileInputStream(configs.get(
-								"FileName").getValue()), configs
-								.get("Encoding").getValue()));
-				reader.readLine();
+				if (reader != null) {
+					reader.close();
+					FileInputStream fis = new FileInputStream(configs.get("FileName").getValue());
+					if (configs.get("Encoding").getValue().toLowerCase().equals("utf-8")) {
+						byte[] headData = new byte[3];
+						fis.read(headData, 0, 3);
+						if (headData[0] != (byte) 0xef || headData[1] != (byte) 0xbb || headData[2] != (byte) 0xbf) {
+							fis.close();
+							fis = new FileInputStream(configs.get("FileName").getValue());
+						}
+					}
+					reader = new BufferedReader(new InputStreamReader(fis, configs.get("Encoding").getValue()));
+					reader.readLine();
+				}
 				currentLine = 0;
 			}
-			while (currentLine < from) {
-				reader.readLine();
-				currentLine++;
+			if (reader != null) {
+				while (currentLine < from) {
+					reader.readLine();
+					currentLine++;
+				}
 			}
 			List<List<CellData>> datas = new ArrayList<List<CellData>>();
 			for (int i = 0; i < count; i++) {
-				String line = reader.readLine();
+				String line = reader == null ? null : reader.readLine();
 				if (line == null)
 					break;
 				currentLine++;
@@ -215,7 +240,7 @@ public class MyJavaQuery implements IJavaQueryData.ISimpleData {
 			List<String> headers = new ArrayList<String>();
 			for (JavaQueryOutputField f : outputFields)
 				headers.add(f.getName());
-			d.setStringHeaders(null);
+			d.setStringHeaders(headers);
 			d.setData(datas);
 			return d;
 		} catch (UnsupportedEncodingException e) {
