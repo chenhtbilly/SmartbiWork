@@ -11,8 +11,11 @@
 	<body>
 		<script type="text/javascript">
 			window.onload = function(){
-				//window.location.href = "http://192.168.2.134:8080/smartbi/vision/clientSDKDemo.jsp";
-				top.window.location.href = "http://192.168.2.134:8080/smartbi/vision/clientSDKDemo.jsp";	//地址栏地址变化
+				if(top.window.document.referrer === ''){
+					//不操作。
+				}else{
+					top.window.location.href = top.window.document.referrer;
+				}
 			}
 		</script>
 	</body>

@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 <meta name="viewport" content="width=device-width; initial-scale=1.4; minimum-scale=1.0; maximum-scale=2.0"/>
-<title>浏览器端SDK登录示例</title>
+<title>浏览器端SDK登录示例2</title>
 <style type="text/css">
 div {
 	text-align: center

@@ -80,14 +80,10 @@ var modalWindow = {
 					}
 					window.__reLogining = true;
 					try {
-						debugger;
-						if(domutils.isMobile()){
-							//移动端超时跳转页面 无用
-							debugger;
-							window.location.href = "clientSDKDemo.jsp";
+						if(top.location==self.location){  
+							window.location.href = window.document.referrer;	//自身是顶层窗口（非iframe引入报表），跳转回外部系统页面；
 						}else{
-							//电脑端超时跳转页面
-							window.location.href = "clientSDKDemo.jsp";
+							top.window.location.href = top.window.location.href;	//ifrme方式，刷新顶层窗口页面，或者根据top.window.location.href判断进行跳转
 						}
 					} catch (e) {
 					}

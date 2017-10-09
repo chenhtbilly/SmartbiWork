@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 <meta name="viewport" content="width=device-width; initial-scale=1.4; minimum-scale=1.0; maximum-scale=2.0"/>
-<title>浏览器端SDK登录示例</title>
+<title>浏览器端SDK登录示例2</title>
 <style type="text/css">
 div {
 	text-align: center
@@ -22,6 +22,7 @@ a {
 	<div>
 		<p id="succ"></p>
 		<input type="button" value="登录" onclick="login()">
+		<a id="h" href="">测试打开</a>
 		<input type="button" value="注销" onclick="logout()">
 		<iframe id="frame" src="" height="300" width="100%"
 			style="display: none"> </iframe>
@@ -36,7 +37,8 @@ a {
 				if (ret && ret.result) {
 					//alert("单点登录成功");
 					//window.location.href = "http://localhost:8080/smartbi/vision/mobileportal.jsp";
-					window.location.href = "mobileportal.jsp";
+					//window.location.href = "mobileportal.jsp";
+					document.getElementById("h").href = "openresource.jsp?resid=I4028818a015b6b316b311ac3015b840c9ce0488b"
 				} else {
 					document.getElementById("succ").innerHTML = "<font color='red'>浏览器端SDK登录失败</font>";
 				}
