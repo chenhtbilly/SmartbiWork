@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SmartbiSSO</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>urlServlet</display-name>
+    <servlet-name>urlServlet</servlet-name>
+    <servlet-class>smartbi.sso.UrlServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>urlServlet</servlet-name>
+    <url-pattern>/urlServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>tokenUserServlet</display-name>
+    <servlet-name>tokenUserServlet</servlet-name>
+    <servlet-class>smartbi.sso.TokenUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tokenUserServlet</servlet-name>
+    <url-pattern>/tokenUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>serverSDKLogoutServlet</display-name>
+    <servlet-name>serverSDKLogoutServlet</servlet-name>
+    <servlet-class>smartbi.sso.ServerSDKLogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>serverSDKLogoutServlet</servlet-name>
+    <url-pattern>/serverSDKLogoutServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
