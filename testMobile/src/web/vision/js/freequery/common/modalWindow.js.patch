@@ -83,6 +83,7 @@ var modalWindow = {
 						if(top.location==self.location){  
 							window.location.href = window.document.referrer;	//自身是顶层窗口（非iframe引入报表），跳转回外部系统页面；
 						}else{
+							//需要解决跨域问题
 							top.window.location.href = top.window.location.href;	//ifrme方式，刷新顶层窗口页面，或者根据top.window.location.href判断进行跳转
 						}
 					} catch (e) {
