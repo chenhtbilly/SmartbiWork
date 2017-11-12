@@ -46,7 +46,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		<input type="button" value="注销" onclick="logout()">
 	</div>
 	<p>
-		备注：<br/>
+		备注：登录异常一般是跨域问题，即smartbi地址和当前浏览器访问的地址不是一个域<br/>
 	</p>
 	<SCRIPT LANGUAGE="JavaScript">
 		//打开页面直接调用登录
