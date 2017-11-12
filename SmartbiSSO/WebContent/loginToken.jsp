@@ -37,6 +37,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		smartbi地址：<input type="text" disabled="disabled" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
 		管理员用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
 		管理员密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
+		<font color=red>部署对应版本的logintoken扩展包后测试</font><br/>
 		<form action="tokenUserServlet" method="post">
 			获取Token用户名：<input type="text" value="${requestScope.tokenUser}" name="tokenUser" size="20">
 			<input type="submit" value="获取token">
