@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>echarts测试工具</title>
 </head>
 <body>
-
+<%
+	request.getRequestDispatcher("echarts340.jsp").forward(request, response);
+%>
 </body>
 </html>
