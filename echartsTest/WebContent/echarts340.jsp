@@ -34,7 +34,9 @@
 			</div>
 			<div id="navbar-collapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-left">
-					<li id="nav-index"><a href="#"><font color="#FF6600" style="font-weight:bold;">ECharts测试-3.4.0(支持词云图)</font></a></li>
+					<li id="title" class="active">
+						<a href="#"><font color="#FF6600">ECharts测试-3.4.0(支持词云图)</font></a>
+					</li>
 					<li id="nav-index"><a
 						href="http://echarts.baidu.com/index.html">首页</a></li>
 					<li id="nav-doc" class="dropdown"><a href="#"
@@ -60,7 +62,7 @@
 							<li><a
 								href="http://echarts.baidu.com/download-extension.html">扩展下载</a></li>
 						</ul></li>
-					<li id="nav-examples"><a href="#" data-toggle="dropdown"
+					<li id="nav-examples" class="dropdown"><a href="#" data-toggle="dropdown"
 						class="dropdown-toggle">实例<b class="caret"></b></a>
 					<ul class="dropdown-menu">
 							<li><a href="http://echarts.baidu.com/examples.html">官方实例</a></li>
@@ -160,7 +162,7 @@
 		src="http://echarts.baidu.com/examples/javascripts/editor.js?_v_=1516200292096"></script>
 	<script type="text/javascript" src="http://echarts.baidu.com/examples/javascripts/hm.js"></script>
 	<script type="text/javascript">
-		document.getElementById('nav-examples').className = 'active';
+		document.getElementById('title').className = 'active';
 	</script>
 </body>
 </html>
