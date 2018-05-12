@@ -34,6 +34,7 @@
 			</div>
 			<div id="navbar-collapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-left">
+					<li id="nav-index"><a href="#"><font color="#FF6600" style="font-weight:bold;">ECharts测试-3.4.0(支持词云图)</font></a></li>
 					<li id="nav-index"><a
 						href="http://echarts.baidu.com/index.html">首页</a></li>
 					<li id="nav-doc" class="dropdown"><a href="#"
@@ -138,6 +139,8 @@
 	<script type="text/javascript" src="http://echarts.baidu.com/examples/vendors/dat.gui.min.js"></script>
 	<script type="text/javascript"
 		src="js/echarts3/echarts.js"></script>
+	<!-- 词云图 -->
+	<script type="text/javascript" src="js/echarts3/echarts-wordcloud.js"></script>
 	<script type="text/javascript"
 		src="http://echarts.baidu.com/examples/vendors/echarts-stat/ecStat.min.js?_v_=1516200292096"></script>
 	<script type="text/javascript"
