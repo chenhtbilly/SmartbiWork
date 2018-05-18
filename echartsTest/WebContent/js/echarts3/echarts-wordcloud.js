@@ -170,7 +170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            rotationStep: seriesModel.get('rotationStep') * DEGREE_TO_RAD,
 
-	            drawOutOfBound: false,
+	            drawOutOfBound: seriesModel.get('drawOutOfBound'),
 
 	            shuffle: false,
 
