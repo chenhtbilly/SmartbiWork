@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>测试</title>
+<style type="text/css">
+	a{
+		text-decoration: none
+	}
+</style>
+</head>
+<body>
+	<h3>测试</h3>
+	<div>
+	</div>	
+	<iframe id="frameLogin" src="http://10.10.202.17:18600/smartbi/vision/index.jsp?user=admin&password=admin" height="300" width="80%" style="display: none"></iframe>
+	<div>
+			打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
+	</div>
+	<p  style="display:inline;">
+	   <input type="button" value="IFrame打开资源" onclick="linkFrame()"  style="display:inline;">
+		<iframe id="frame" src="" height="300" width="80%" style="display: none">
+			
+		</iframe>
+	</p>
+	<script type="text/javascript">
+		function linkFrame() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "http://10.10.202.17:18600/smartbi/vision/openresource.jsp?resid="+ document.getElementById('resid').value;
+		}
+	</script>
+</body>
+</html>
