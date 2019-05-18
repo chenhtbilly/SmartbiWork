@@ -6,6 +6,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>服务端SDK注销</title>
 <style type="text/css">
 	div{
