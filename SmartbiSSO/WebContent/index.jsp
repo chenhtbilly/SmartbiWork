@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>Smartbi单点登录测试工具</title>
 <style type="text/css">
 	div{
@@ -25,6 +26,11 @@
 			</p>
 		</div>
 	</c:if> --%>
+	<%
+		String serverUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+		System.out.println(serverUrl);
+		session.setAttribute("serverUrl", serverUrl);
+	%>
 	<h3>单点登录测试工具</h3>
 	<div>
 		<form action="urlServlet" method="post">
@@ -45,7 +51,7 @@
 			单点登录密码 / 管理员密码(方法一)：<input type="text" value="${sessionScope.password}" name="password" size="20"><br/>
 		</c:if>
 		<c:if test="${empty sessionScope.password}">
-			单点登录密码 / 管理员密码(方法一)：<input type="text" value="manager" name="password" size="20"><br/>
+			单点登录密码 / 管理员密码(方法一)：<input type="text" value="admin" name="password" size="20"><br/>
 		</c:if>
 			<input type="submit" value="保存">
 		</form>

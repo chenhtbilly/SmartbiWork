@@ -6,6 +6,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>浏览器端SDK登录</title>
 <%
     request.setCharacterEncoding("GBK");
@@ -41,7 +42,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		smartbi地址：<input type="text" disabled="disabled" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
 		单点登录用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
 		单点登录密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
-		打开资源id：<input type="text" id="resid" value="I4028ff81015bbd11bd110ba5015bbd2381160098" size="50"/><br/>
+		打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
 		<input type="button" value="新窗口打开资源" onclick="window.open(document.getElementsByName('smartbiUrl')[0].value + '/vision/openresource.jsp?resid='+ document.getElementById('resid').value)">
 		<input type="button" value="注销" onclick="logout()">
 	</div>

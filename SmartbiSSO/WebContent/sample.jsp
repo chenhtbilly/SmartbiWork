@@ -28,5 +28,6 @@
 	<h1>测试1111111111111111</h1>
 	<iframe style="width: 100%; height: 100%; min-height: 500px;" 
 	src="http://192.168.1.10:17300/smartbi/vision/openresource.jsp?resid=I4028818a0165d2b1d2b1553b0165f57f5d426e22&user=admin&password=admin&showtoolbar=true&refresh=true">
+	</iframe>
 </body>
 </html>

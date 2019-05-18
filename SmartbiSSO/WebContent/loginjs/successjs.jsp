@@ -41,12 +41,12 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		smartbi地址：<input type="text" disabled="disabled" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
 		单点登录用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
 		单点登录密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
-		打开资源id：<input type="text" id="resid" value="I4028ff81015bbd11bd110ba5015bbd2381160098" size="50"/><br/>
+		打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
 		<input type="button" value="新窗口打开资源" onclick="window.open(document.getElementsByName('smartbiUrl')[0].value + '/vision/openresource.jsp?resid='+ document.getElementById('resid').value)">
 		<input type="button" value="IFrame打开资源" onclick="linkFrame()">
 		<form method="POST" id="formLogout" onsubmit="go();return false">
-		    <p>注销成功后的跳转地址：<input type="text" name="surl" size="50" value="http://localhost:8090${SSOLogin}/logoutjs/successjs.jsp"></p>
-		    <p>注销失败后的跳转地址：<input type="text" name="furl" size="50" value="http://localhost:8090${SSOLogin}/logoutjs/failjs.jsp"></p>    
+		    <p>注销成功后的跳转地址：<input type="text" name="surl" size="50" value="${serverUrl}${SSOLogin}/logoutjs/successjs.jsp"></p>
+		    <p>注销失败后的跳转地址：<input type="text" name="furl" size="50" value="${serverUrl}${SSOLogin}/logoutjs/failjs.jsp"></p>    
 		    <p><input type="submit" value="注销" name="B1"></p>
 		</form>
 	</div>

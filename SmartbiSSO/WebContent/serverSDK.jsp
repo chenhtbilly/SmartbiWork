@@ -6,6 +6,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>服务端SDK登录</title>
 <%
     request.setCharacterEncoding("GBK");
@@ -58,8 +59,8 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		smartbi地址：<input type="text" disabled="disabled" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
 		单点登录用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
 		单点登录密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
-		打开资源id：<input type="text" id="resid" value="I4028ff81015bbd11bd110ba5015bbd2381160098" size="50"/><br/>
-			<%-- <a href="${sessionScope.smartbiUrl}/vision/openresource.jsp?resid=I4028ff81015bbd11bd110ba5015bbd2381160098&user=${requestScope.tokenUser}&password=${requestScope.token}">新窗口测试</a> --%>
+		打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
+			<%-- <a href="${sessionScope.smartbiUrl}/vision/openresource.jsp?resid=I402881f738d5a79a0138d5c88f7e0089&user=${requestScope.tokenUser}&password=${requestScope.token}">新窗口测试</a> --%>
 		<%if (ret) {
 		%>
 			<input type="button" value="新窗口打开资源" onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>')">
@@ -70,7 +71,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 	<p>
 		备注：<br/>
 		1、点击新窗口打开资源，链接中带了smartbiCookie参数，url形式如下：<br/>
-		http://localhost:8080/smartbi/vision/openresource.jsp?resid=I4028ff81015bbd11bd110ba5015bbd2381160098&smartbiCookie=JSESSIONID%3DC8FFECB2CE200B8A43179B51B5491969%3B+Path%3D%2Fsmartbi%3B
+		http://localhost:8080/smartbi/vision/openresource.jsp?resid=I402881f738d5a79a0138d5c88f7e0089&smartbiCookie=JSESSIONID%3DC8FFECB2CE200B8A43179B51B5491969%3B+Path%3D%2Fsmartbi%3B
 		<br/>
 		2、复制新窗口打开资源的地址，可以在一个隐身窗口打开链接直接访问资源（无需登录）。如果将链接中的smartbiCookie参数的值删除或者修改，则在隐身窗口中打开会提示
 		<font color=red>“SmartbiCookie对应的会话已失效！”</font>

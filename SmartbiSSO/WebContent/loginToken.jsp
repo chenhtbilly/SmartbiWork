@@ -6,6 +6,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>loginToken登录</title>
 <style type="text/css">
 	div{
@@ -53,9 +54,9 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 			</c:if>
 		</p>
 			Token：<input type="text" id="token" value="${requestScope.token}" size="50"/><br/>
-			打开资源id：<input type="text" id="resid" value="I4028ff81015bbd11bd110ba5015bbd2381160098" size="50"/><br/>
+			打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
 			<%-- 
-			<a href="${sessionScope.smartbiUrl}/vision/openresource.jsp?resid=I4028ff81015bbd11bd110ba5015bbd2381160098&user=${requestScope.tokenUser}&password=${requestScope.token}">新窗口测试</a> 
+			<a href="${sessionScope.smartbiUrl}/vision/openresource.jsp?resid=I402881f738d5a79a0138d5c88f7e0089&user=${requestScope.tokenUser}&password=${requestScope.token}">新窗口测试</a> 
 			<input type="button" value="新窗口打开资源" onclick="location='<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&user=${requestScope.tokenUser}&password=${requestScope.token}'">
 			--%>
 			<input type="button" value="新窗口打开资源" onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&user=${requestScope.tokenUser}&password=${requestScope.token}')">
@@ -67,7 +68,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		</iframe>
 		备注：<br/>
 		1、链接中带了password参数，参数值为获取到的token，url形式如下：<br/>
-		http://localhost:8080/smartbi/vision/openresource.jsp?resid=I4028ff81015bbd11bd110ba5015bbd2381160098&user=liming&password=I4028ff81015cfea5fea563d0015cfec67991038d
+		http://localhost:8080/smartbi/vision/openresource.jsp?resid=I402881f738d5a79a0138d5c88f7e0089&user=liming&password=I4028ff81015cfea5fea563d0015cfec67991038d
 		<br/>
 		
 	</p>

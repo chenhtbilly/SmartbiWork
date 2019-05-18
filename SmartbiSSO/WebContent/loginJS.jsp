@@ -7,6 +7,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>JS脚本登录</title>
 <style type="text/css">
 	div{
@@ -30,6 +31,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 	if (null != (String) session.getAttribute("password")) {
 		password = (String) session.getAttribute("password");
 	}
+	
 %>
 </head>
 <body>
@@ -40,8 +42,8 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		<form method="POST" id="formLogin" onsubmit="go();return false">
 		    <p>单点登录用户：<input type="text" name="user" size="20" value="<%=user%>"></p>     
 		    <p>单点登录密码：<input type="text" name="password" size="20" value="<%=password%>"></p>
-		    <p>登录成功后的跳转地址：<input type="text" name="surl" size="50" value="http://localhost:8090${SSOLogin}/loginjs/successjs.jsp"></p>
-		    <p>登录失败后的跳转地址：<input type="text" name="furl" size="50" value="http://localhost:8090${SSOLogin}/loginjs/failjs.jsp"></p>     
+		    <p>登录成功后的跳转地址：<input type="text" name="surl" size="50" value="${serverUrl}${SSOLogin}/loginjs/successjs.jsp"></p>
+		    <p>登录失败后的跳转地址：<input type="text" name="furl" size="50" value="${serverUrl}${SSOLogin}/loginjs/failjs.jsp"></p>     
 		    <p><input type="submit" value="登录" name="B1"></p> 
 		</form>
 	</div>	
