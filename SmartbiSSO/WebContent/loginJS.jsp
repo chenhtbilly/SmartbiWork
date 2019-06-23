@@ -35,7 +35,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 %>
 </head>
 <body>
-	<h3>单点登录测试工具/方法二</h3>
+	<h3>单点登录测试工具/页面中使用Form登录</h3>
 	<div>
 		smartbi地址：<input type="text" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
 		

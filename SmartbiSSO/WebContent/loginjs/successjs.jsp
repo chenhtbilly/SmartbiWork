@@ -8,7 +8,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>JS脚本登录成功</title>
+<title>页面中使用Form登录成功</title>
 <%
     request.setCharacterEncoding("GBK");
     String user ="admin";
@@ -34,7 +34,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 </style>
 </head>
 <body>
-	<h3>单点登录测试工具/方法二</h3>
+	<h3>单点登录测试工具/页面中使用Form</h3>
 	<div>
 		<p id="succ">
 			<font color="red">单点登录成功</font>

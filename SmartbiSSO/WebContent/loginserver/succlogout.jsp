@@ -18,7 +18,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 </style>
 </head>
 <body>
-	<h3>单点登录测试工具/方法四</h3>
+	<h3>单点登录测试工具/服务端SDK</h3>
 	<div>
 		<p id="succ">
 		</p>

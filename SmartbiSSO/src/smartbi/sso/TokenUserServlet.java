@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import smartbi.sdk.ClientConnector;
 import smartbi.sdk.InvokeResult;
 
@@ -17,6 +19,8 @@ import smartbi.sdk.InvokeResult;
 public class TokenUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	
+	private static Logger log = Logger.getLogger(TokenUserServlet.class);
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -62,9 +66,9 @@ public class TokenUserServlet extends HttpServlet {
 		conn.open(user, password);//以管理员身份登录
 		InvokeResult result = conn.remoteInvoke("LoginTokenModule", "generateLoginToken", new Object[] {tokenUser});//用户名
 		if (null == result || null == result.getResult()) {
-
+			
 		} else {
-			System.out.println("Token："+result.getResult());
+			log.info("Token："+result.getResult());
 			request.setAttribute("tokenUser", tokenUser);
 			request.setAttribute("token", result.getResult());
 		}

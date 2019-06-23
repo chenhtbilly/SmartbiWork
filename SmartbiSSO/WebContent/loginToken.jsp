@@ -33,7 +33,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 %>
 </head>
 <body>
-	<h3>单点登录测试工具/方法一</h3>
+	<h3>单点登录测试工具/LoginToken扩展包</h3>
 	<div>
 		smartbi地址：<input type="text" disabled="disabled" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
 		管理员用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>

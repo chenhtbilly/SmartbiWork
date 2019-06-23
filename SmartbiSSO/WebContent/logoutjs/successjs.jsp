@@ -7,7 +7,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>JS脚本注销成功</title>
+<title>页面中使用Form注销成功</title>
 <%
     request.setCharacterEncoding("GBK");
     String smartbiURL = "http://localhost:8080/smartbi";

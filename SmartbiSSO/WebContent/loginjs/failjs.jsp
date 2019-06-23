@@ -7,7 +7,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>JS脚本登录失败</title>
+<title>页面中使用Form登录失败</title>
 <style type="text/css">
 	div{
 	  	text-align:center

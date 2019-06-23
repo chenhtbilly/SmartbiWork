@@ -21,7 +21,7 @@ a {
 <SCRIPT type="text/javascript" src="js/JSLoader.js"></SCRIPT>
 </head>
 <body>
-	<h3>单点登录测试工具/方法三</h3>
+	<h3>单点登录测试工具/浏览器端SDK</h3>
 	<div>
 		<p id="succ"></p>
 		smartbi地址：<input type="text" disabled="disabled"
