@@ -14,20 +14,30 @@
 	<h3>测试</h3>
 	<div>
 	</div>	
+	<iframe id="frameLogin" src="http://10.10.202.17:18600/smartbi/vision/index.jsp?user=admin&password=admin" height="300" width="80%" style="display: none"></iframe>
 	<div>
-			打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
+			打开资源id：<input type="text" id="resid" value="I8a8a4a91016bff0dff0d735f016bff75ce440801" size="50"/><br/>
 	</div>
 	<p  style="display:inline;">
 	   <input type="button" value="IFrame打开资源" onclick="linkFrame()"  style="display:inline;">
-		<iframe id="frame" src="" height="300" width="80%" style="display: none">
+	   <input type="button" value="IFrame打开首页" onclick="linkFrame1()"  style="display:inline;"><br/>
+		<iframe id="frame" src="" height="500" width="90%" style="display: none">
 			
 		</iframe>
 	</p>
 	<script type="text/javascript">
 		function linkFrame() {
 			document.getElementById("frame").style.display = 'inline';
-			document.getElementById("frame").src = "http://10.10.202.17:18500/smartbi/vision/openresource.jsp?resid="+ document.getElementById('resid').value +"&user=admin&password=admin";
+			document.getElementById("frame").src = "http://10.10.202.17:18600/smartbi/vision/openresource.jsp?resid="+ document.getElementById('resid').value;
 		}
+		
+		function linkFrame1() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "http://10.10.202.17:18600/smartbi";
+		}
+		window.setTimeout(function(){
+			linkFrame1();
+		},1000);
 	</script>
 </body>
 </html>
