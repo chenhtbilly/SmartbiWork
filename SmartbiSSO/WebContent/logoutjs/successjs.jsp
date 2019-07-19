@@ -34,6 +34,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
 		<input type="button" value="新窗口打开资源" onclick="window.open(document.getElementsByName('smartbiUrl')[0].value + '/vision/openresource.jsp?resid='+ document.getElementById('resid').value)">
 		<input type="button" value="IFrame打开资源" onclick="linkFrame()">
+		<input type="button" value="IFrame打开首页" onclick="linkFrameIndex()">
 	</div>
 	<iframe id="frame" src="" height="300" width="100%" style="display: none">
 			
@@ -46,6 +47,10 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		function linkFrame() {
 			document.getElementById("frame").style.display = '';
 			document.getElementById("frame").src = "<%=smartbiURL%>/vision/openresource.jsp?resid="+ document.getElementById('resid').value;
+		}
+		function linkFrameIndex() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/index.jsp";
 		}
 	</script>
 </body>

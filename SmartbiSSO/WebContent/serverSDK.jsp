@@ -63,10 +63,14 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 			<%-- <a href="${sessionScope.smartbiUrl}/vision/openresource.jsp?resid=I402881f738d5a79a0138d5c88f7e0089&user=${requestScope.tokenUser}&password=${requestScope.token}">新窗口测试</a> --%>
 		<%if (ret) {
 		%>
+			<input type="button" value="iframe打开首页" onclick="linkFrame()">
 			<input type="button" value="新窗口打开资源" onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>')">
 			<input type="button" value="注销" onclick="logout()"/>
 		<%}
 		%>
+		<br/>
+		<iframe id="frame" src="" height="600" width="95%" style="display: none">
+		</iframe>
 	</div>
 	<p>
 		备注：<br/>
@@ -109,6 +113,11 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		    form1.submit();  
 		    // 删除form  
 		    document.body.removeChild(form1);  
+		}
+		
+		function linkFrame() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/index.jsp?smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>";
 		}
 	</script>
 </body>
