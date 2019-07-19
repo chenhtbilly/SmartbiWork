@@ -45,6 +45,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
 		<input type="button" value="新窗口打开资源" onclick="window.open(document.getElementsByName('smartbiUrl')[0].value + '/vision/openresource.jsp?resid='+ document.getElementById('resid').value)">
 		<input type="button" value="IFrame打开资源" onclick="linkFrame()">
+		<input type="button" value="IFrame打开首页" onclick="linkFrameIndex()">
 		<form method="POST" id="formLogout" onsubmit="go();return false">
 		    <p>注销成功后的跳转地址：<input type="text" name="surl" size="50" value="${serverUrl}${SSOLogin}/logoutjs/successjs.jsp"></p>
 		    <p>注销失败后的跳转地址：<input type="text" name="furl" size="50" value="${serverUrl}${SSOLogin}/logoutjs/failjs.jsp"></p>    
@@ -60,6 +61,10 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		function linkFrame() {
 			document.getElementById("frame").style.display = '';
 			document.getElementById("frame").src = "<%=smartbiURL%>/vision/openresource.jsp?resid="+ document.getElementById('resid').value;
+		}
+		function linkFrameIndex() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/index.jsp";
 		}
 		//注销
 		function go(){
