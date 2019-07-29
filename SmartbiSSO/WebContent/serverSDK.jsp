@@ -64,6 +64,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		<%if (ret) {
 		%>
 			<input type="button" value="iframe打开首页" onclick="linkFrame()">
+			<input type="button" value="iframe打开资源" onclick="linkFrame1()">
 			<input type="button" value="新窗口打开资源" onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>')">
 			<input type="button" value="注销" onclick="logout()"/>
 		<%}
@@ -118,6 +119,12 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		function linkFrame() {
 			document.getElementById("frame").style.display = 'inline';
 			document.getElementById("frame").src = "<%=smartbiURL%>/vision/index.jsp?smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>";
+		}
+		
+		function linkFrame1() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/openresource.jsp?smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>"
+					+ '&resid=' + document.getElementById('resid').value;
 		}
 	</script>
 </body>

@@ -43,9 +43,14 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		单点登录用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
 		单点登录密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
 		打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
+		<input type="button" value="iframe打开首页" onclick="linkFrame()">
+		<input type="button" value="iframe打开资源" onclick="linkFrame1()">
 		<input type="button" value="新窗口打开资源" onclick="window.open(document.getElementsByName('smartbiUrl')[0].value + '/vision/openresource.jsp?resid='+ document.getElementById('resid').value)">
 		<input type="button" value="注销" onclick="logout()">
+		<iframe id="frame" src="" height="600" width="95%" style="display: none">
+		</iframe>
 	</div>
+	
 	<p>
 		备注：登录异常一般是跨域问题，即smartbi地址和当前浏览器访问的地址不是一个域<br/>
 	</p>
@@ -90,6 +95,16 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		    	document.getElementById("succ").innerHTML = "<font color='red'>注销异常，"+ e +"</font>";
 		    }
 	    }
+	    
+	    function linkFrame() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/index.jsp";
+		}
+	    function linkFrame1() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/openresource.jsp?resid="+ document.getElementById('resid').value;
+		}
+	    
 	</SCRIPT>
 </body>
 </html>
