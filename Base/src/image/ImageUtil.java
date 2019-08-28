@@ -39,9 +39,11 @@ public class ImageUtil {
 	    g2d.rotate(angle * Math.PI / 180); //设置水印倾斜角度
 	    int x = 15;
 	    int y = yblank;
+	    String [] arr = drawStr.split("_");
 	    for (int k = 0; k < 30; k++) {
 	        for (int j = 0; j < 12; j++) {
-	            graphics.drawString(drawStr, x, y);
+	            graphics.drawString(arr[0], x, y);
+	            graphics.drawString(arr[1], x, y+20);//换行
 	            x += fontWidth;
 	        }
 	        x = 15;
