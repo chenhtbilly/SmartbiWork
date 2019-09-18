@@ -63,16 +63,31 @@ public class TokenUserServlet extends HttpServlet {
 		session.setAttribute("user", user);
 		session.setAttribute("password", password);
 		ClientConnector conn = new ClientConnector(smartbiUrl);
-		conn.open(user, password);//以管理员身份登录
-		InvokeResult result = conn.remoteInvoke("LoginTokenModule", "generateLoginToken", new Object[] {tokenUser});//用户名
-		if (null == result || null == result.getResult()) {
-			
-		} else {
-			log.info("Token："+result.getResult());
+		boolean open;
+		try {
+			open = conn.open(user, password);
+			if (open) {
+				InvokeResult result = conn.remoteInvoke("LoginTokenModule", "generateLoginToken", new Object[] {tokenUser});//用户名
+				if (null == result || null == result.getResult()) {
+					
+				} else {
+					log.info("Token："+result.getResult());
+					request.setAttribute("tokenUser", tokenUser);
+					request.setAttribute("token", result.getResult());
+				}
+			}else{
+				request.setAttribute("tokenUser", tokenUser);
+				request.setAttribute("token", "获取token失败：登录失败");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 			request.setAttribute("tokenUser", tokenUser);
-			request.setAttribute("token", result.getResult());
+			request.setAttribute("token", "获取token失败:"+e.getMessage());
+			request.getRequestDispatcher("loginToken.jsp").forward(request,response);
+		} finally {
+			conn.close();
 		}
-		conn.close();
+		
 		request.getRequestDispatcher("loginToken.jsp").forward(request,response);
 	}
 
