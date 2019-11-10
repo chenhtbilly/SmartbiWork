@@ -62,9 +62,9 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 	    var BOF_UI_DEBUG = false;
 	    // 创建全局唯一的JS装载器
 	    try {
-		    var jsloader = new JSLoader(config);
+		    var jsloaderClient = new JSLoader(config);
 		    // 创建应用程序对象
-		    var userService = jsloader.imports("bof.usermanager.UserService");
+		    var userService = jsloaderClient.imports("bof.usermanager.UserService");
 		    // 通过userService.getInstance()可以调用所有的UserManagerModule方法.
 		    var user = document.getElementsByName("user")[0].value;
 		    var password = document.getElementsByName("password")[0].value;
@@ -81,9 +81,9 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 	    //注销
 	    function logout(){
 	    	try {
-			    var jsloader = new JSLoader(config);
+			    var jsloaderClient = new JSLoader(config);
 			    // 创建应用程序对象
-			    var userService = jsloader.imports("bof.usermanager.UserService");
+			    var userService = jsloaderClient.imports("bof.usermanager.UserService");
 			    // 通过userService.getInstance()可以调用所有的UserManagerModule方法.
 			    var result = userService.getInstance().logout();
 			    if (result) {
