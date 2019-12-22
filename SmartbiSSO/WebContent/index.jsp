@@ -53,10 +53,11 @@
 				session.setAttribute("user", "admin");
 			%>
 		</c:if>
-		<c:if test="${not empty sessionScope.password}">
+		
+		<c:if test="${null!=sessionScope.password}">
 			单点登录密码 / 管理员密码(方法一)：<input type="text" value="${sessionScope.password}" name="password" size="20"><br/>
 		</c:if>
-		<c:if test="${empty sessionScope.password}">
+		<c:if test="${null==sessionScope.password}">
 			单点登录密码 / 管理员密码(方法一)：<input type="text" value="admin" name="password" size="20"><br/>
 			<%
 				session.setAttribute("password", "admin");
