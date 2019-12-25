@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=GBK" 
-import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserManagerService" pageEncoding="GBK"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserManagerService" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>±¨±í×ÊÔ´post´«²Î¹¤¾ß</title>
+<title>æŠ¥è¡¨èµ„æºpostä¼ å‚å·¥å…·</title>
 <%
-    request.setCharacterEncoding("GBK");
+    request.setCharacterEncoding("UTF-8");
  
     String user ="admin";
     String password = "admin";
@@ -34,33 +34,34 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 </style>
 </head>
 <body>
-	<h3>±¨±í×ÊÔ´post´«²Î¹¤¾ß</h3>
+	<h3>æŠ¥è¡¨èµ„æºpostä¼ å‚å·¥å…·</h3>
 	<iframe id="frameLogin" src="<%=smartbiURL%>/vision/index.jsp?user=<%=user%>&password=<%=password%>" height="0" width="0" style="display: none">
 	</iframe>
 	<div>
 		<p id="succ">
 		</p>
-		smartbiµØÖ·£º<input type="text" disabled="disabled" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
-		µ¥µãµÇÂ¼ÓÃ»§£º<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
-		µ¥µãµÇÂ¼ÃÜÂë£º<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
-		´ò¿ª×ÊÔ´id£º<input type="text" id="resid" value="I402881b31fd239c7014f20d297d80a38" size="50"/><br/>
-		¸½¼Ó²ÎÊı£º<input type="text" id="other" value="showtoolbar=false" size="80"/><br/>
-		±¨±í²ÎÊıÊÇ·ñBase64±àÂë£º<input type="radio" id="other" name="base64" value="1" size="80"/>ÊÇ
-								<input type="radio" id="other" name="base64" value="2" checked="checked" size="80"/>·ñ<br/>
+		smartbiåœ°å€ï¼š<input type="text" disabled="disabled" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
+		å•ç‚¹ç™»å½•ç”¨æˆ·ï¼š<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
+		å•ç‚¹ç™»å½•å¯†ç ï¼š<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
+		æ‰“å¼€èµ„æºidï¼š<input type="text" id="resid" value="I402881b31fd239c7014f20d297d80a38" size="50"/><br/>
+		é™„åŠ å‚æ•°ï¼š<input type="text" id="other" value="showtoolbar=false" size="80"/><br/>
+		æŠ¥è¡¨å‚æ•°æ˜¯å¦Base64ç¼–ç ï¼š<input type="radio" id="other1" name="base64" value="1" size="80"/>æ˜¯
+								<input type="radio" id="other2" name="base64" value="2" checked="checked" size="80"/>å¦<br/>
 		
 		<form id="url" action="" method="post">
-		±¨±í²ÎÊı£º<textarea rows="5" cols="80" name="paramsInfo"></textarea><br/>
+			æŠ¥è¡¨å‚æ•°ï¼š
+			<textarea rows="5" id="param" cols="80" name="paramsInfo">[{"name":"å‚æ•°æ¼”ç¤º_åŒºåŸŸ","value":"åå—","displayValue":"åå—"},{"name":"å‚æ•°æ¼”ç¤º_åŸå¸‚","value":"æ·±åœ³","displayValue":"æ·±åœ³"}]</textarea>
 		</form>
-		
-		<input type="button" value="iframe´ò¿ª×ÊÔ´" onclick="linkFrame()">
-		<input type="button" value="ĞÂ´°¿Ú´ò¿ª×ÊÔ´" onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value)"/>
+		<br/>
+		<input type="button" value="iframeæ‰“å¼€èµ„æº" onclick="linkFrame()">
+		<input type="button" value="æ–°çª—å£æ‰“å¼€èµ„æº" onclick="openWindow()"/>
 		<br/>
 		<iframe id="frame" name="frame" height="600" width="95%" style="display: none">
 		</iframe>
 	</div>
 	<p>
-		±¸×¢£º<br/>
-		1¡¢±¾Ò³ÃæÄ¬ÈÏÊ¹ÓÃÈ«¾ÖÉèÖÃµÄÓÃ»§ÃûºÍÃÜÂëÍ¨¹ıÒş²ØµÄiframeµÇÂ¼smartbiÊ×Ò³
+		å¤‡æ³¨ï¼š<br/>
+		1ã€æœ¬é¡µé¢é»˜è®¤ä½¿ç”¨å…¨å±€è®¾ç½®çš„ç”¨æˆ·åå’Œå¯†ç é€šè¿‡éšè—çš„iframeç™»å½•smartbié¦–é¡µ
 		<br/>
 	</p>
 	<script type="text/javascript">
@@ -71,8 +72,19 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 					+ document.getElementById('resid').value + '&' +document.getElementById('other').value;
 		}
 		
+		function getBase64() {
+			debugger;
+			var flag = document.getElementById("other1").checked;
+			if(flag){
+				document.getElementById("param").name = "paramsInfoBase64";
+			}else{
+				document.getElementById("param").name = "paramsInfo";
+			}
+		}
+		
 		function linkFrame() {
 			getActionUrl();
+			getBase64();
 			document.getElementById("url").target = "frame";
 			document.getElementById("frame").style.display = 'inline';
 			document.getElementById("url").submit();
@@ -80,6 +92,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		
 		function openWindow() {
 			getActionUrl();
+			getBase64();
 			document.getElementById("url").target = "_blank";
 			document.getElementById("url").submit();
 		}
