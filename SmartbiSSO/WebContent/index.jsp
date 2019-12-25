@@ -68,10 +68,15 @@
 	</div>
 	<br/>
 	<div>
+	<h4>单点登录方法列表</h4>
 		<a href="loginToken.jsp">方法一：LoginToken扩展包</a><br/>
 		<a href="loginJS.jsp">方法二：页面中使用Form登录</a><br/>
 		<a href="clientSDK.jsp">方法三：浏览器端SDK</a><br/>
 		<a href="serverSDK.jsp">方法四：服务器端SDK</a><br/>
+	</div>
+	<div>
+	<h4>传参工具</h4>
+		<a href="post.jsp">报表资源post传参工具</a><br/>
 	</div>
 </body>
 </html>
