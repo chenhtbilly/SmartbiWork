@@ -46,7 +46,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 	</div>	
 	<div>
 		<p id="succ">
-			<c:if test="${not empty requestScope.token}">
+			<c:if test="${not empty requestScope.token}&&${empty requestScope.errmsg}">
 				<font color="red">获取token成功</font>
 			</c:if>
 			<c:if test="${not empty requestScope.errmsg}">

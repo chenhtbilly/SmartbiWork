@@ -77,13 +77,13 @@ public class TokenUserServlet extends HttpServlet {
 				}
 			}else{
 				request.setAttribute("tokenUser", tokenUser);
-				request.setAttribute("token", "获取token失败：登录失败");
+				request.setAttribute("errmsg", "获取token失败：登录失败");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("tokenUser", tokenUser);
-			request.setAttribute("token", "获取token失败:"+e.getMessage());
-			request.getRequestDispatcher("loginToken.jsp").forward(request,response);
+			request.setAttribute("errmsg", e.getMessage());
+//			request.getRequestDispatcher("loginToken.jsp").forward(request,response);
 		} finally {
 			conn.close();
 		}

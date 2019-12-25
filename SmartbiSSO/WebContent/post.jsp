@@ -7,7 +7,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>报表资源post传参工具</title>
+<title>报表资源post传参测试页</title>
 <%
     request.setCharacterEncoding("UTF-8");
  
@@ -34,7 +34,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 </style>
 </head>
 <body>
-	<h3>报表资源post传参工具</h3>
+	<h3>报表资源post传参测试页</h3>
 	<iframe id="frameLogin" src="<%=smartbiURL%>/vision/index.jsp?user=<%=user%>&password=<%=password%>" height="0" width="0" style="display: none">
 	</iframe>
 	<div>

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>Smartbi单点登录测试工具</title>
+<title>Smartbi集成测试工具</title>
 <style type="text/css">
 	div{
 	  	text-align:center
@@ -31,7 +31,7 @@
 		System.out.println("localServerUrl="+serverUrl);
 		session.setAttribute("serverUrl", serverUrl);
 	%>
-	<h3>单点登录测试工具</h3>
+	<h3>Smartbi集成测试工具</h3>
 	<div>
 		<form action="urlServlet" method="post">
 		<h4>全局设置</h4>
@@ -68,15 +68,15 @@
 	</div>
 	<br/>
 	<div>
-	<h4>单点登录方法列表</h4>
+	<h4>单点登录测试方法</h4>
 		<a href="loginToken.jsp">方法一：LoginToken扩展包</a><br/>
 		<a href="loginJS.jsp">方法二：页面中使用Form登录</a><br/>
 		<a href="clientSDK.jsp">方法三：浏览器端SDK</a><br/>
 		<a href="serverSDK.jsp">方法四：服务器端SDK</a><br/>
 	</div>
 	<div>
-	<h4>传参工具</h4>
-		<a href="post.jsp">报表资源post传参工具</a><br/>
+	<h4>传参测试页</h4>
+		<a href="post.jsp">报表资源post传参测试页</a><br/>
 	</div>
 </body>
 </html>
