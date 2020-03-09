@@ -34,7 +34,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 </style>
 </head>
 <body>
-	<h3>报表资源post传参测试页</h3>
+	<h3>报表资源get方式传参测试页</h3>
 	<iframe id="frameLogin" src="<%=smartbiURL%>/vision/index.jsp?user=<%=user%>&password=<%=password%>" height="0" width="0" style="display: none">
 	</iframe>
 	<div>
@@ -47,9 +47,9 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 								<input type="radio" id="other2" name="base64" value="2" checked="checked" size="80"/>否<br/>
 		
 		<form id="url" action="" method="get">
-			打开资源id：<input type="text" id="resid" value="I402881b31fd239c7014f20d297d80a38" size="50"/><br/>
 			报表参数：
 			<textarea rows="5" id="param" cols="80" name="paramsInfo">[{"name":"参数演示_区域","value":"华南","displayValue":"华南"},{"name":"参数演示_城市","value":"深圳","displayValue":"深圳"}]</textarea>
+			打开资源id：<input type="text" id="res" name="resid" value="I402881b31fd239c7014f20d297d80a38" size="50"/><br/>
 		</form>
 		<br/>
 		<input type="button" value="iframe打开资源" onclick="linkFrame()">
