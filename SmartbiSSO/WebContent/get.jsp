@@ -49,7 +49,8 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		<form id="url" action="" method="get">
 			报表参数：
 			<textarea rows="5" id="param" cols="80" name="paramsInfo">[{"name":"参数演示_区域","value":"华南","displayValue":"华南"},{"name":"参数演示_城市","value":"深圳","displayValue":"深圳"}]</textarea>
-			打开资源id：<input type="text" id="res" name="resid" value="I402881b31fd239c7014f20d297d80a38" size="50"/><br/>
+			<br/>
+			打开资源id：<input type="text" id="res" name="resid" value="I402881b31fd239c7014f20d297d80a38" size="50"/>
 		</form>
 		<br/>
 		<input type="button" value="iframe打开资源" onclick="linkFrame()">
