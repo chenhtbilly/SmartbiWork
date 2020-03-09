@@ -12,11 +12,11 @@ a {
 </head>
 <body>
 	<h3>集成url测试</h3>
-	本页面不读取全局设置的url，url尽量拼接user和password<br/>
 	<input type="button" value="IFrame打开地址" onclick="linkFrame()" style="display: inline;">
 	<input type="button" value="新窗口打开地址"
 		onclick="window.open(document.getElementById('param').value)" style="display: inline;">
 	<br/>
+	打开地址：（本页面不读取全局设置，url尽量拼接user和password）<br/>
 	<textarea rows="3" id="param" cols="180" name="paramsInfo">http://10.10.202.17:18600/smartbi/vision/index.jsp?user=admin&password=admin</textarea>
 	<br/>
 	<iframe id="frame" src="" height="500" width="90%" style="display: none"> </iframe>
