@@ -77,7 +77,8 @@
 	<div>
 	<h4>传参测试页</h4>
 		<a href="testIframe.html">集成url测试页</a><br/>
-		<a href="post.jsp">报表资源post传参测试页</a><br/>
+		<a href="get.jsp">报表资源get方式传参测试页</a><br/>
+		<a href="post.jsp">报表资源post方式传参测试页</a><br/>
 	</div>
 </body>
 </html>
