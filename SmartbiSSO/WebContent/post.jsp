@@ -52,6 +52,8 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 			报表参数：
 			<textarea rows="5" id="param" cols="80" name="paramsInfo">[{"name":"参数演示_区域","value":"华南","displayValue":"华南"},{"name":"参数演示_城市","value":"深圳","displayValue":"深圳"}]</textarea>
 		</form>
+		iframe宽度(数值或百分比)：<input type="text" id="iwidth" value="95%" size="10"/><br/>
+		iframe高度(数值)：<input type="text" id="iheight" value="600" size="10"/><br/>
 		<br/>
 		<input type="button" value="iframe打开资源" onclick="linkFrame()">
 		<input type="button" value="新窗口打开资源" onclick="openWindow()"/>
@@ -60,8 +62,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		</iframe>
 	</div>
 	<p>
-		备注：<br/>
-		1、本页面默认使用全局设置的用户名和密码通过隐藏的iframe登录smartbi首页
+		备注：本页面默认使用全局设置的用户名和密码通过隐藏的iframe登录smartbi首页
 		<br/>
 	</p>
 	<script type="text/javascript">
@@ -73,7 +74,6 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		}
 		
 		function getBase64() {
-			debugger;
 			var flag = document.getElementById("other1").checked;
 			if(flag){
 				document.getElementById("param").name = "paramsInfoBase64";
@@ -85,11 +85,27 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		function linkFrame() {
 			getActionUrl();
 			getBase64();
+			var iwidth = document.getElementById("iwidth").value;
+			var iheight = document.getElementById("iheight").value;
+			var regW = /^(0|[1-9][0-9]*[%]{0,1})$/;
+			var regH = /^(0|[1-9][0-9]*)$/;
+			if (regW.test(iwidth)) {
+				document.getElementById("frame").width = iwidth;
+			} else {
+				alert("输入的宽度值不合法，使用默认值：95%");
+				document.getElementById("iwidth").value="95%";
+			}
+			if (regH.test(iheight)) {
+				document.getElementById("frame").height = iheight;
+			} else {
+				alert("输入的高度值不合法，使用默认值：600");
+				document.getElementById("iheight").value = 600;
+			}
 			document.getElementById("url").target = "frame";
 			document.getElementById("frame").style.display = 'inline';
 			document.getElementById("url").submit();
 		}
-		
+
 		function openWindow() {
 			getActionUrl();
 			getBase64();

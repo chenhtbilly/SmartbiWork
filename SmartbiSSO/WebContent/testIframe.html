@@ -12,6 +12,9 @@ a {
 </head>
 <body>
 	<h3>集成url测试页</h3>
+	iframe宽度(数值或百分比)：<input type="text" id="iwidth" value="95%" size="10"/><br/>
+	iframe高度(数值)：<input type="text" id="iheight" value="600" size="10"/><br/>
+	<br/>
 	<input type="button" value="IFrame打开地址" onclick="linkFrame()" style="display: inline;">
 	<input type="button" value="新窗口打开地址"
 		onclick="window.open(document.getElementById('param').value)" style="display: inline;">
@@ -19,9 +22,25 @@ a {
 	打开地址：（url尽量拼接user和password，本页面不读取全局设置，参数中有中文则本页面必须为UTF-8编码）<br/>
 	<textarea rows="3" id="param" cols="180" name="paramsInfo">http://10.10.202.17:18600/smartbi/vision/index.jsp?user=admin&password=admin</textarea>
 	<br/>
-	<iframe id="frame" src="" height="500" width="90%" style="display: none"> </iframe>
+	<iframe id="frame" src="" height="600" width="95%" style="display: none"> </iframe>
 	<script type="text/javascript">
 		function linkFrame() {
+			var iwidth = document.getElementById("iwidth").value;
+			var iheight = document.getElementById("iheight").value;
+			var regW = /^(0|[1-9][0-9]*[%]{0,1})$/;
+			var regH = /^(0|[1-9][0-9]*)$/;
+			if (regW.test(iwidth)) {
+				document.getElementById("frame").width = iwidth;
+			} else {
+				alert("输入的宽度值不合法，使用默认值：95%");
+				document.getElementById("iwidth").value="95%";
+			}
+			if (regH.test(iheight)) {
+				document.getElementById("frame").height = iheight;
+			} else {
+				alert("输入的高度值不合法，使用默认值：600");
+				document.getElementById("iheight").value = 600;
+			}
 			document.getElementById('frame').style.display = 'inline';
 			document.getElementById('frame').src = document.getElementById('param').value;
 		}
