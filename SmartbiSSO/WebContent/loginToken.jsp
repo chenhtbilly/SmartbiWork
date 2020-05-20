@@ -39,10 +39,11 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		管理员用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
 		管理员密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
 		<font color=red>部署对应版本的logintoken扩展包后测试</font><br/>
-		<form action="tokenUserServlet" method="post">
+		<form id="token" action="tokenUserServlet" method="post">
 			获取Token用户名：<input type="text" value="${requestScope.tokenUser}" name="tokenUser" size="20">
 			<input type="submit" value="获取token">
 		</form>
+		
 	</div>	
 	<div>
 		<p id="succ">
@@ -55,15 +56,15 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		</p>
 			Token：<input type="text" id="token" value="${requestScope.token}" size="50"/><br/>
 			打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
-			<%-- 
-			<a href="${sessionScope.smartbiUrl}/vision/openresource.jsp?resid=I402881f738d5a79a0138d5c88f7e0089&user=${requestScope.tokenUser}&password=${requestScope.token}">新窗口测试</a> 
-			<input type="button" value="新窗口打开资源" onclick="location='<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&user=${requestScope.tokenUser}&password=${requestScope.token}'">
-			--%>
+			
+			<input type="button" value="iframe打开首页" onclick="linkFrameIndex()"> 
+			<input type="button" value="iframe打开资源" onclick="linkFrame()">
+			<input type="button" value="新窗口打开首页" onclick="window.open('<%=smartbiURL%>/vision/index.jsp?'+'user=${requestScope.tokenUser}&password=${requestScope.token}')">
 			<input type="button" value="新窗口打开资源" onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&user=${requestScope.tokenUser}&password=${requestScope.token}')">
-			<input type="button" value="IFrame打开资源" onclick="linkFrame()">
+			<input type="button" value="注销" onclick="logout()">
 	</div>
 	<p>
-		<iframe id="frame" src="" height="300" width="100%" style="display: none">
+		<iframe id="frame" name="frameTarget" src="" height="300" width="100%" style="display: none">
 			
 		</iframe>
 		备注：<br/>
@@ -76,6 +77,15 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		function linkFrame() {
 			document.getElementById("frame").style.display = '';
 			document.getElementById("frame").src = "<%=smartbiURL%>/vision/openresource.jsp?resid="+ document.getElementById('resid').value +"&user=${requestScope.tokenUser}&password=${requestScope.token}";
+		}
+		function linkFrameIndex() {
+			document.getElementById("frame").style.display = '';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/index.jsp?"+ "user=${requestScope.tokenUser}&password=${requestScope.token}";
+		}
+		
+		function logout(){
+			document.getElementById("frame").style.display = '';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/logout.jsp";
 		}
 	</script>
 </body>
