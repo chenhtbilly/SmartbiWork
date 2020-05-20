@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=GBK"
 	pageEncoding="GBK"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +13,13 @@
 		text-decoration: none
 	}
 </style>
+<%
+    request.setCharacterEncoding("GBK");
+    String smartbiURL = "http://localhost:8080/smartbi";
+	if (null != session.getAttribute("smartbiUrl")) {
+		smartbiURL = (String) session.getAttribute("smartbiUrl");
+	}
+%>
 </head>
 <body>
 		<marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()"><p>新闻1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单车欲问边</p></marquee>
@@ -21,7 +30,7 @@
 		<p>新闻1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长河落日圆</p>
 		<marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()"><p>新闻1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;萧关逢候骑</p></marquee>
 		<marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()"><p>新闻1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;都护在燕然</p></marquee>
-		<p>新闻1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jkajjgsgdsgsdgafkjaskk</p>
+		<p>新闻1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;测试是是是是是</p>
 		<marquee direction="left" onmouseover="this.stop()" onmouseout="this.start()"><p>新闻1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jkajjgsgdsgsdgafkjaskk</p></marquee>
 </body>
 
