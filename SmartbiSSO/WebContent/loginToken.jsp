@@ -39,8 +39,8 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		管理员用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
 		管理员密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
 		<font color=red>部署对应版本的logintoken扩展包后测试</font><br/>
-		<form id="token" action="tokenUserServlet" method="post">
-			获取Token用户名：<input type="text" value="${requestScope.tokenUser}" name="tokenUser" size="20">
+		<form id="tokenForm" action="tokenUserServlet" method="post">
+			获取Token用户名：<input type="text" value="${requestScope.tokenUser}" name="tokenUser" id="tuser" size="20">
 			<input type="submit" value="获取token">
 		</form>
 		
@@ -59,8 +59,10 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 			
 			<input type="button" value="iframe打开首页" onclick="linkFrameIndex()"> 
 			<input type="button" value="iframe打开资源" onclick="linkFrame()">
-			<input type="button" value="新窗口打开首页" onclick="window.open('<%=smartbiURL%>/vision/index.jsp?'+'user=${requestScope.tokenUser}&password=${requestScope.token}')">
-			<input type="button" value="新窗口打开资源" onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&user=${requestScope.tokenUser}&password=${requestScope.token}')">
+			<input type="button" value="新窗口打开首页" 
+			onclick="window.open('<%=smartbiURL%>/vision/index.jsp?user='+ document.getElementById('tuser').value +'&password='+ document.getElementById('token').value)">
+			<input type="button" value="新窗口打开资源" 
+			onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&user='+ document.getElementById('tuser').value +'&password='+ document.getElementById('token').value)">
 			<input type="button" value="注销" onclick="logout()">
 	</div>
 	<p>
@@ -76,11 +78,11 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 	<script type="text/javascript">
 		function linkFrame() {
 			document.getElementById("frame").style.display = '';
-			document.getElementById("frame").src = "<%=smartbiURL%>/vision/openresource.jsp?resid="+ document.getElementById('resid').value +"&user=${requestScope.tokenUser}&password=${requestScope.token}";
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/openresource.jsp?resid="+ document.getElementById('resid').value +"&user="+ document.getElementById('tuser').value +"&password=" + document.getElementById('token').value;
 		}
 		function linkFrameIndex() {
 			document.getElementById("frame").style.display = '';
-			document.getElementById("frame").src = "<%=smartbiURL%>/vision/index.jsp?"+ "user=${requestScope.tokenUser}&password=${requestScope.token}";
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/index.jsp?"+ "user="+ document.getElementById('tuser').value +"&password=" + document.getElementById('token').value;
 		}
 		
 		function logout(){
