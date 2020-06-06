@@ -10,10 +10,11 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <title>服务端SDK登录</title>
 <%
     request.setCharacterEncoding("GBK");
- 
-    String user ="admin";
-    String password = "manager";
-    String smartbiURL = "http://localhost:8080/smartbi";
+	String user ="admin";
+	String password = "admin";
+	String serverUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+	session.setAttribute("serverUrl", serverUrl);
+	String smartbiURL = serverUrl+ "/smartbi";
 	if (null != session.getAttribute("smartbiUrl")) {
 		smartbiURL = (String) session.getAttribute("smartbiUrl");
 	}
@@ -25,11 +26,22 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 	}
 	ClientConnector conn = new ClientConnector(smartbiURL);
     // 建立此连接时，就对smartbi进行了登录
-    boolean ret = conn.open(user, password);
+    boolean ret = false;
+    String errMsg = "";
+    try{
+    	ret = conn.open(user, password);
+    }catch(Exception e){
+    	e.printStackTrace();
+    	errMsg = "连接服务器"+ smartbiURL+ "异常";
+    }
     if (!ret) {
+    	if(errMsg.equals("")){
+	    	errMsg = "登录服务器"+ smartbiURL+ "失败";
+    	}
 %>
     <script>
     //alert("登录失败!");
+    	console.log("登录失败!");
     </script>
 <%
     } else {
@@ -95,11 +107,14 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 	<%}else{
 	%>
 		<script type="text/javascript">
-			document.getElementById("succ").innerHTML = "<font color='red'>服务器端SDK登录失败</font>";
+			document.getElementById("succ").innerHTML = "<font color='red'>服务器端SDK登录失败,失败原因：<%=errMsg%></font>";
 		</script>
 	<%}
 	%>
 	<script type="text/javascript">
+	<%if (conn!=null && conn.getCookie()!=null) {
+	%>
+	
 		function logout(){
 			// JavaScript 构建一个 form  
 		    var form1 = document.createElement("form");  
@@ -126,6 +141,9 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 			document.getElementById("frame").src = "<%=smartbiURL%>/vision/openresource.jsp?smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>"
 					+ '&resid=' + document.getElementById('resid').value;
 		}
+		<%}else{
+		}
+		%>
 	</script>
 </body>
 </html>

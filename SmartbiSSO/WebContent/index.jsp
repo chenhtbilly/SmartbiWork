@@ -39,9 +39,9 @@
 			smartbiµÿ÷∑£∫<input type="text" value="${sessionScope.smartbiUrl}" name="smartbiUrl" size="50"><br/>
 		</c:if>
 		<c:if test="${empty sessionScope.smartbiUrl}">
-			smartbiµÿ÷∑£∫<input type="text" value="http://10.10.202.17:18600/smartbi" name="smartbiUrl" size="50"><br/>
+			smartbiµÿ÷∑£∫<input type="text" value="${serverUrl}/smartbi" name="smartbiUrl" size="50"><br/>
 			<%
-				session.setAttribute("smartbiUrl", "http://10.10.202.17:18600/smartbi");
+				session.setAttribute("smartbiUrl", serverUrl+"/smartbi");
 			%>
 		</c:if>
 		<c:if test="${not empty sessionScope.user}">

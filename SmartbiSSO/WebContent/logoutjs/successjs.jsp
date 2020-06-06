@@ -10,7 +10,9 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <title>页面中使用Form注销成功</title>
 <%
     request.setCharacterEncoding("GBK");
-    String smartbiURL = "http://localhost:8080/smartbi";
+	String serverUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+	session.setAttribute("serverUrl", serverUrl);
+	String smartbiURL = serverUrl+ "/smartbi";
 	if (null != session.getAttribute("smartbiUrl")) {
 		smartbiURL = (String) session.getAttribute("smartbiUrl");
 	}

@@ -18,9 +18,11 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 </style>
 <%
     request.setCharacterEncoding("GBK");
-    String user ="admin";
-    String password = "manager";
-    String smartbiURL = "http://localhost:8080/smartbi";
+	String user ="admin";
+	String password = "admin";
+	String serverUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+	session.setAttribute("serverUrl", serverUrl);
+	String smartbiURL = serverUrl+ "/smartbi";
 	if (null != session.getAttribute("smartbiUrl")) {
 		smartbiURL = (String) session.getAttribute("smartbiUrl");
 	}
