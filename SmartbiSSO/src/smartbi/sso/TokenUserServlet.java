@@ -1,7 +1,13 @@
 package smartbi.sso;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLConnection;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,8 +53,9 @@ public class TokenUserServlet extends HttpServlet {
 			return;
 		}
 		String user = "admin";
-		String password = "manager";
-		String smartbiUrl = "http://localhost:8080/smartbi";
+		String password = "admin";
+		String smartbiUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+ 
+				"/smartbi";
 		HttpSession session = request.getSession();
 		if (null != session.getAttribute("smartbiUrl")) {
 			smartbiUrl = (String) session.getAttribute("smartbiUrl");
@@ -62,33 +69,61 @@ public class TokenUserServlet extends HttpServlet {
 		session.setAttribute("smartbiUrl", smartbiUrl);
 		session.setAttribute("user", user);
 		session.setAttribute("password", password);
-		ClientConnector conn = new ClientConnector(smartbiUrl);
-		boolean open;
+		HttpURLConnection urlConnection = (HttpURLConnection)new URL(smartbiUrl).openConnection();
+		boolean flag = false;
 		try {
-			open = conn.open(user, password);
-			if (open) {
-				InvokeResult result = conn.remoteInvoke("LoginTokenModule", "generateLoginToken", new Object[] {tokenUser});//用户名
-				if (null == result || null == result.getResult()) {
-					
-				} else {
-					log.info("Token："+result.getResult());
+			flag = getConnStatus(urlConnection);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		if (flag) {
+			ClientConnector conn = new ClientConnector(smartbiUrl);
+			boolean open;
+			try {
+				open = conn.open(user, password);
+				if (open) {
+					InvokeResult result = conn.remoteInvoke("LoginTokenModule", "generateLoginToken", new Object[] {tokenUser});//用户名
+					if (null == result || null == result.getResult()) {
+						
+					} else {
+						log.info("Token："+result.getResult());
+						request.setAttribute("tokenUser", tokenUser);
+						request.setAttribute("token", result.getResult());
+					}
+				}else{
 					request.setAttribute("tokenUser", tokenUser);
-					request.setAttribute("token", result.getResult());
+					request.setAttribute("errmsg", "获取token失败：登录失败");
 				}
-			}else{
+			} catch (Exception e) {
+				e.printStackTrace();
 				request.setAttribute("tokenUser", tokenUser);
-				request.setAttribute("errmsg", "获取token失败：登录失败");
+				request.setAttribute("errmsg", e.getMessage());
+			} finally {
+				if (flag && null != conn) {
+					conn.close();
+				}else{
+					conn = null;
+				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			request.setAttribute("tokenUser", tokenUser);
-			request.setAttribute("errmsg", e.getMessage());
-//			request.getRequestDispatcher("loginToken.jsp").forward(request,response);
-		} finally {
-			conn.close();
+		}else{
+			request.setAttribute("errmsg", "连接"+ smartbiUrl +"失败");
 		}
 		
 		request.getRequestDispatcher("loginToken.jsp").forward(request,response);
 	}
 
+	public  static boolean getConnStatus(HttpURLConnection conn) throws Exception {
+		conn.setRequestProperty("Content-Type", "");
+		conn.setDoOutput(true);
+		conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
+		conn.setRequestMethod("GET");
+		int responseCode = conn.getResponseCode();
+		log.info("responseCode="+responseCode);
+		if (responseCode != 200) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 }

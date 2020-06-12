@@ -53,7 +53,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 				<font color="red">获取token成功</font>
 			</c:if>
 			<c:if test="${not empty requestScope.errmsg}">
-				<font color="red">获取失败，${requestScope.errmsg}</font>
+				<font color="red">获取token失败，${requestScope.errmsg}</font>
 			</c:if>
 		</p>
 			Token：<input type="text" id="token" value="${requestScope.token}" size="50"/><br/>
