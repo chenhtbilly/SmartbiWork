@@ -1,13 +1,8 @@
 package smartbi.sso;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.net.URLConnection;
-
-import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -90,9 +85,9 @@ public class TokenUserServlet extends HttpServlet {
 						request.setAttribute("tokenUser", tokenUser);
 						request.setAttribute("token", result.getResult());
 					}
-				}else{
+				} else {
 					request.setAttribute("tokenUser", tokenUser);
-					request.setAttribute("errmsg", "获取token失败：登录失败");
+					request.setAttribute("errmsg", "登录失败");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -105,7 +100,7 @@ public class TokenUserServlet extends HttpServlet {
 					conn = null;
 				}
 			}
-		}else{
+		} else {
 			request.setAttribute("errmsg", "连接"+ smartbiUrl +"失败");
 		}
 		
