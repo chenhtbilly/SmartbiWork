@@ -7,6 +7,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
 <title>浏览器端SDK登录</title>
 <%
     request.setCharacterEncoding("GBK");
