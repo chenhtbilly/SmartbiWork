@@ -78,7 +78,10 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		%>
 			<input type="button" value="iframe打开首页" onclick="linkFrame()">
 			<input type="button" value="iframe打开资源" onclick="linkFrame1()">
-			<input type="button" value="新窗口打开资源" onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>')">
+			<input type="button" value="新窗口打开首页" 
+			onclick="window.open('<%=smartbiURL%>/vision/index.jsp?smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>')">
+			<input type="button" value="新窗口打开资源" 
+			onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>')">
 			<input type="button" value="注销" onclick="logout()"/>
 		<%}
 		%>
