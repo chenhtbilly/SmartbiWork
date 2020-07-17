@@ -37,7 +37,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
     }
     if (!ret) {
     	if(errMsg.equals("")){
-	    	errMsg = "登录服务器"+ smartbiURL+ "失败";
+	    	errMsg = "连接或登录服务器"+ smartbiURL+ "失败";
     	}
 %>
     <script>
@@ -74,7 +74,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		单点登录密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
 		打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
 			<%-- <a href="${sessionScope.smartbiUrl}/vision/openresource.jsp?resid=I402881f738d5a79a0138d5c88f7e0089&user=${requestScope.tokenUser}&password=${requestScope.token}">新窗口测试</a> --%>
-		<%if (ret) {
+		<%if (ret && conn!=null && conn.getCookie()!=null) {
 		%>
 			<input type="button" value="iframe打开首页" onclick="linkFrame()">
 			<input type="button" value="iframe打开资源" onclick="linkFrame1()">
@@ -83,6 +83,14 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 			<input type="button" value="新窗口打开资源" 
 			onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value +'&smartbiCookie=<%=java.net.URLEncoder.encode(conn.getCookie(), "UTF-8")%>')">
 			<input type="button" value="注销" onclick="logout()"/>
+		<%}else{
+		%>	
+			<input type="button" value="iframe打开首页" onclick="linkFrame()">
+			<input type="button" value="iframe打开资源" onclick="linkFrame1()">
+			<input type="button" value="新窗口打开首页" 
+			onclick="window.open('<%=smartbiURL%>/vision/index.jsp')">
+			<input type="button" value="新窗口打开资源" 
+			onclick="window.open('<%=smartbiURL%>/vision/openresource.jsp?resid='+ document.getElementById('resid').value')">
 		<%}
 		%>
 		<br/>
@@ -146,7 +154,17 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 					+ '&resid=' + document.getElementById('resid').value;
 		}
 		<%}else{
+		%>	
+		function linkFrame() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/index.jsp";
 		}
+		
+		function linkFrame1() {
+			document.getElementById("frame").style.display = 'inline';
+			document.getElementById("frame").src = "<%=smartbiURL%>/vision/openresource.jsp?resid=" + document.getElementById('resid').value;
+		}
+		<%}
 		%>
 	</script>
 </body>
