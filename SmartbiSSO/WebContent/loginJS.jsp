@@ -43,10 +43,10 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		smartbi地址：<input type="text" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
 		
 		<form method="POST" id="formLogin" onsubmit="go();return false">
-		    <p>单点登录用户：<input type="text" name="user" size="20" value="<%=user%>"></p>     
-		    <p>单点登录密码：<input type="text" name="password" size="20" value="<%=password%>"></p>
-		    <p>登录成功后的跳转地址：<input type="text" name="surl" size="50" value="${serverUrl}${SSOLogin}/loginjs/successjs.jsp"></p>
-		    <p>登录失败后的跳转地址：<input type="text" name="furl" size="50" value="${serverUrl}${SSOLogin}/loginjs/failjs.jsp"></p>     
+		    <p>单点登录用户user：<input type="text" name="user" size="20" value="<%=user%>"></p>     
+		    <p>单点登录密码password：<input type="text" name="password" size="20" value="<%=password%>"></p>
+		    <p>登录成功后的跳转地址surl：<input type="text" name="surl" size="50" value="${serverUrl}${SSOLogin}/loginjs/successjs.jsp"></p>
+		    <p>登录失败后的跳转地址furl：<input type="text" name="furl" size="50" value="${serverUrl}${SSOLogin}/loginjs/failjs.jsp"></p>     
 		    <p><input type="submit" value="登录" name="B1"></p> 
 		</form>
 	</div>	

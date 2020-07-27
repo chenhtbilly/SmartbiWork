@@ -44,15 +44,15 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		<p id="succ">
 		</p>
 		smartbi地址：<input type="text" disabled="disabled" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
-		单点登录用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
-		单点登录密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
-		打开资源id：<input type="text" id="resid" value="I402881b31fd239c7014f20d297d80a38" size="50"/><br/>
+		单点登录用户user：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
+		单点登录密码password：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
+		打开资源resid：<input type="text" id="resid" value="I402881b31fd239c7014f20d297d80a38" size="50"/><br/>
 		附加参数：<input type="text" id="other" value="showtoolbar=false" size="80"/><br/>
 		报表参数是否Base64编码：<input type="radio" id="other1" name="base64" value="1" size="80"/>是
 								<input type="radio" id="other2" name="base64" value="2" checked="checked" size="80"/>否<br/>
 		
 		<form id="url" action="" method="post">
-			报表参数：
+			报表参数paramsInfo或paramsInfoBase64：
 			<textarea rows="5" id="param" cols="80" name="paramsInfo">[{"name":"参数演示_区域","value":"华南","displayValue":"华南"},{"name":"参数演示_城市","value":"深圳","displayValue":"深圳"}]</textarea>
 		</form>
 		iframe宽度(数值或百分比)：<input type="text" id="iwidth" value="95%" size="10"/><br/>

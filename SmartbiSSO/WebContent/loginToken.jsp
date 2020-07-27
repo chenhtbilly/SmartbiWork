@@ -43,7 +43,7 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 		管理员密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
 		<font color=red>部署对应版本的logintoken扩展包后测试</font><br/>
 		<form id="tokenForm" action="tokenUserServlet" method="post">
-			获取Token用户名：<input type="text" value="${requestScope.tokenUser}" name="tokenUser" id="tuser" size="20">
+			获取Token用户名user：<input type="text" value="${requestScope.tokenUser}" name="tokenUser" id="tuser" size="20">
 			<input type="submit" value="获取token">
 		</form>
 		
@@ -57,8 +57,8 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 				<font color="red">获取token失败，${requestScope.errmsg}</font>
 			</c:if>
 		</p>
-			Token：<input type="text" id="token" value="${requestScope.token}" size="50"/><br/>
-			打开资源id：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
+			Token(password)：<input type="text" id="token" value="${requestScope.token}" size="50"/><br/>
+			打开资源resid：<input type="text" id="resid" value="I402881f738d5a79a0138d5c88f7e0089" size="50"/><br/>
 			
 			<input type="button" value="iframe打开首页" onclick="linkFrameIndex()"> 
 			<input type="button" value="iframe打开资源" onclick="linkFrame()">
