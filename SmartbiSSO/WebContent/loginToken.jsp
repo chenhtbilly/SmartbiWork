@@ -38,11 +38,11 @@ import="java.util.*, smartbi.sdk.ClientConnector, smartbi.sdk.service.user.UserM
 <body>
 	<h3>单点登录测试工具/LoginToken扩展包</h3>
 	<div>
-		smartbi地址：<input type="text" disabled="disabled" value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
-		管理员用户：<input type="text" disabled="disabled" value="<%=user%>" name="user" size="20"><br/>
-		管理员密码：<input type="text" disabled="disabled" value="<%=password%>" name="password" size="20"><br/>
 		<font color=red>部署对应版本的logintoken扩展包后测试</font><br/>
 		<form id="tokenForm" action="tokenUserServlet" method="post">
+			smartbi地址：<input type="text"  value="<%=smartbiURL%>" name="smartbiUrl" size="50"><br/>
+			管理员用户：<input type="text"  value="<%=user%>" name="user" size="20"><br/>
+			管理员密码：<input type="text"  value="<%=password%>" name="password" size="20"><br/>
 			获取Token用户名user：<input type="text" value="${requestScope.tokenUser}" name="tokenUser" id="tuser" size="20">
 			<input type="submit" value="获取token">
 		</form>

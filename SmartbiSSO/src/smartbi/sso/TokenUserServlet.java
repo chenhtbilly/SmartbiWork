@@ -47,20 +47,29 @@ public class TokenUserServlet extends HttpServlet {
 			request.getRequestDispatcher("loginToken.jsp").forward(request,response);
 			return;
 		}
-		String user = "admin";
-		String password = "admin";
-		String smartbiUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+ 
-				"/smartbi";
+		String user = request.getParameter("user");
+		String password = request.getParameter("password");
+		String smartbiUrl = request.getParameter("smartbiUrl");
+		if("".equals(user) || null==user){
+			user = "admin";
+		}
+		if("".equals(password) || null==password){
+			password = "admin";
+		}
+		if("".equals(smartbiUrl) || null==smartbiUrl){
+			smartbiUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+ 
+					"/smartbi";
+		}
 		HttpSession session = request.getSession();
-		if (null != session.getAttribute("smartbiUrl")) {
-			smartbiUrl = (String) session.getAttribute("smartbiUrl");
-		}
-		if (null != (String) session.getAttribute("user")) {
-			user = (String) session.getAttribute("user");
-		}
-		if (null != (String) session.getAttribute("password")) {
-			password = (String) session.getAttribute("password");
-		}
+//		if (null != session.getAttribute("smartbiUrl")) {
+//			smartbiUrl = (String) session.getAttribute("smartbiUrl");
+//		}
+//		if (null != (String) session.getAttribute("user")) {
+//			user = (String) session.getAttribute("user");
+//		}
+//		if (null != (String) session.getAttribute("password")) {
+//			password = (String) session.getAttribute("password");
+//		}
 		session.setAttribute("smartbiUrl", smartbiUrl);
 		session.setAttribute("user", user);
 		session.setAttribute("password", password);
@@ -105,6 +114,7 @@ public class TokenUserServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher("loginToken.jsp").forward(request,response);
+//		response.sendRedirect("loginToken.jsp");
 	}
 
 	public  static boolean getConnStatus(HttpURLConnection conn) throws Exception {
