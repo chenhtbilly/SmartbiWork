@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-<title>Smartbi集成测试工具</title>
+<title>Smartbi测试-首页</title>
 <style type="text/css">
 	div{
 	  	text-align:center
@@ -32,10 +32,10 @@
 		System.out.println("localServerUrl="+serverUrl);
 		session.setAttribute("serverUrl", serverUrl);
 	%>
-	<h3>Smartbi集成测试工具</h3>
+	<h3>Smartbi测试</h3>
 	<div>
 		<form action="urlServlet" method="post">
-		<h4>全局设置</h4>
+		<h4>集成测试设置</h4>
 		<c:if test="${not empty sessionScope.smartbiUrl}">
 			smartbi地址：<input type="text" value="${sessionScope.smartbiUrl}" name="smartbiUrl" size="50"><br/>
 		</c:if>
@@ -80,6 +80,10 @@
 		<a href="testIframe.html">集成url测试页</a><br/>
 		<a href="get.jsp">报表资源get方式传参测试页</a><br/>
 		<a href="post.jsp">报表资源post方式传参测试页</a><br/>
+	</div>
+	<div>
+	<h4>其他测试页</h4>
+		<a href="/echartsTest">echarts版本测试</a><br/>
 	</div>
 </body>
 </html>
