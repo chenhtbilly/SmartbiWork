@@ -81,9 +81,11 @@
 		<a href="get.jsp">报表资源get方式传参测试页</a><br/>
 		<a href="post.jsp">报表资源post方式传参测试页</a><br/>
 	</div>
+	<!--
 	<div>
 	<h4>其他测试页</h4>
 		<a href="/echartsTest">echarts版本测试</a><br/>
 	</div>
+	 -->
 </body>
 </html>
